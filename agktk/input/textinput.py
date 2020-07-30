@@ -15,7 +15,7 @@ from appgamekit import (
     stop_text_input as stop,
     sync as _sync,
 )
-from ..constants import (
+from .._constants import (
     INPUT_TEXT_ACTIVE as _INPUT_TEXT_ACTIVE,
     # INPUT_TEXT_DONE as _INPUT_TEXT_DONE,
 )

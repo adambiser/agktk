@@ -23,7 +23,7 @@ from appgamekit import (
     set_raw_touch_value as _set_raw_touch_value,
 )
 # noinspection PyUnresolvedReferences
-from ..constants import (
+from .._constants import (
     TOUCH_UNKNOWN,
     TOUCH_SHORT,
     TOUCH_HOLD,

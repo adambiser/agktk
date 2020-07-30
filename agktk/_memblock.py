@@ -52,8 +52,8 @@ from appgamekit import (
     set_mesh_memblock_vertex_position as _set_mesh_memblock_vertex_position,
     set_mesh_memblock_vertex_uv as _set_mesh_memblock_vertex_uv,
 )
-from .image import Image
-from .sound import Sound
+from ._image import Image
+from ._sound import Sound
 
 
 class Memblock(object):

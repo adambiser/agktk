@@ -28,7 +28,7 @@ from appgamekit import (
     set_http_timeout as _set_http_timeout,
     set_http_verify_certificate as _set_http_verify_certificate,
 )
-from .enums import HttpResponseState
+from ._enums import HttpResponseState
 
 
 class HttpConnection(object):

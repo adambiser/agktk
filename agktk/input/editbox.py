@@ -51,12 +51,12 @@ from appgamekit import (
     set_edit_box_wrap_mode as _set_edit_box_wrap_mode,
 )
 # noinspection PyUnresolvedReferences
-from ..constants import (
+from .._constants import (
     EDIT_BOX_WRAP_SCROLL as _EDIT_BOX_WRAP_SCROLL,
     EDIT_BOX_WRAP_NEW_LINE as _EDIT_BOX_WRAP_NEW_LINE,
 )
-from ..font import Font
-from ..image import Image
+from .._font import Font
+from .._image import Image
 from typing import Optional, Tuple
 import weakref as _weakref
 

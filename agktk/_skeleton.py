@@ -38,8 +38,8 @@ from appgamekit import (
     stop_skeleton_2d_animation as _stop_skeleton_2d_animation,
 )
 from enum import IntEnum as _IntEnum, auto as _auto
-from .image import Image
-from .sprite import Sprite
+from ._image import Image
+from ._sprite import Sprite
 import weakref
 
 

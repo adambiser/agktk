@@ -17,7 +17,7 @@ from appgamekit import (
     set_virtual_joystick_size as _set_virtual_joystick_size,
     set_virtual_joystick_visible as _set_virtual_joystick_visible,
 )
-from agktk.image import Image
+from agktk._image import Image
 from typing import Optional, Tuple
 
 

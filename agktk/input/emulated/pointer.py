@@ -10,7 +10,7 @@ from appgamekit import (
     get_pointer_x as get_x,
     get_pointer_y as get_y,
 )
-from ...constants import (
+from ..._constants import (
     STATE_UP as _STATE_UP,
     STATE_DOWN as _STATE_DOWN,
 )

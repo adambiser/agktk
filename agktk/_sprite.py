@@ -161,12 +161,12 @@ from appgamekit import (
     # Skeleton > 2D
     fix_sprite_to_skeleton_2d as _fix_sprite_to_skeleton_2d,
 )
-from .enums import (
+from ._enums import (
     PhysicsMode,
     # SpriteShape,
     TransparencyMode,
 )
-from .image import Image
+from ._image import Image
 from typing import Optional, Sequence, Tuple, Union
 from copy import deepcopy as _deepcopy
 

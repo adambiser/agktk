@@ -28,7 +28,7 @@ from appgamekit import (
     set_raw_mouse_position as set_position,
     set_raw_mouse_visible as set_visible,
 )
-from ..constants import (
+from .._constants import (
     STATE_UP as _STATE_UP,
     STATE_DOWN as _STATE_DOWN,
 )

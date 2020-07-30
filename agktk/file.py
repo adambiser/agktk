@@ -62,7 +62,7 @@ from appgamekit import (
     get_file_size as _get_file_size,
     set_file_pos as _set_file_pos,
 )
-from .enums import FolderMode
+from ._enums import FolderMode
 
 
 def get_windows_drives():

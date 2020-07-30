@@ -16,7 +16,7 @@ from appgamekit import (
     get_raw_last_key as get_last_key,
 )
 # noinspection PyUnresolvedReferences
-from ..constants import (
+from .._constants import (
     STATE_UP as _STATE_UP,
     STATE_DOWN as _STATE_DOWN,
     KEYBOARD_NONE as _KEYBOARD_NONE,

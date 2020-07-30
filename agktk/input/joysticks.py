@@ -25,7 +25,7 @@ from appgamekit import (
     get_raw_joystick_z as _get_raw_joystick_z,
     set_raw_joystick_dead_zone as set_dead_zone,
 )
-from ..constants import (
+from .._constants import (
     STATE_UP as _STATE_UP,
     STATE_DOWN as _STATE_DOWN,
 )

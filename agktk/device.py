@@ -27,16 +27,16 @@ from appgamekit import (
     # Input-Raw > Existence
     # get_accelerometer_exists as has_accelerometer,  # input.sensors.accelerometer
     get_camera_exists as has_camera,
-    # get_gps_sensor_exists as has_gps_sensor,  # input.sensors.gps
-    # get_gyro_sensor_exists as has_gyro_sensor,  # input.sensors.gyro
-    # get_joystick_exists as has_joystick,  # input.joysticks
-    # get_keyboard_exists as get_keyboard_type,  # input.keyboard
-    # get_light_sensor_exists as has_light_sensor,  # input.sensors.light
-    # get_magnetic_sensor_exists as has_magnetic_sensor,  # input.sensors.magnetic
-    # get_mouse_exists as has_mouse,  # input.mouse
-    # get_multi_touch_exists as has_multi_touch,  # input.multitouch
-    # get_proximity_sensor_exists as has_proximity_sensor,  # input.proximity
-    # get_rotation_vector_sensor_exists as has_rotation_vector_sensor,  # input.rotation
+    # get_gps_sensor_exists,  # input.sensors.gps
+    # get_gyro_sensor_exists,  # input.sensors.gyro
+    # get_joystick_exists,  # input.joysticks
+    # get_keyboard_exists,  # input.keyboard
+    # get_light_sensor_exists,  # input.sensors.light
+    # get_magnetic_sensor_exists,  # input.sensors.magnetic
+    # get_mouse_exists,  # input.mouse
+    # get_multi_touch_exists,  # input.multitouch
+    # get_proximity_sensor_exists,  # input.proximity
+    # get_rotation_vector_sensor_exists,  # input.rotation
 
     # Multiplayer > Properties
     get_device_ip as get_ip_address,
@@ -47,12 +47,12 @@ from appgamekit import (
     # clear_screen,  # display
     # enable_clear_color,  # display
     # enable_clear_depth,  # display
-    get_device_dpi as get_dpi,
-    get_device_height as get_height,
-    get_device_width as get_width,
+    get_device_dpi,  # as get_dpi,
+    get_device_height,  # as get_height,
+    get_device_width,  # as get_width,
     # get_display_aspect,  # display
-    get_max_device_height as get_max_height,
-    get_max_device_width as get_max_width,
+    get_max_device_height,  # as get_max_height,
+    get_max_device_width,  # as get_max_width,
     get_orientation,
     get_paused as is_paused,
     # get_polygons_drawn,  # debug
@@ -72,14 +72,14 @@ from appgamekit import (
     get_window_height,
     get_window_width,
     is_supported_depth_texture as supports_depth_textures,
-    maximize_window as maximize,
-    minimize_app as minimize,
+    maximize_window as maximize_app,
+    minimize_app,
     # render,  # display
     # render_2d_back,  # display
     # render_2d_front,  # display
     # render_3d,  # display
     # render_shadow_map,  # display
-    restore_app as restore,
+    restore_app,
     # screen_fps,  # display
     # screen_to_world_x,  # display
     # screen_to_world_y,  # display
@@ -106,7 +106,7 @@ from appgamekit import (
     set_window_size,
     # swap,  # display
     # sync,  # display
-    update_device_size as update_size,
+    update_device_size,  # as update_size,
     # world_to_screen_x,  # display
     # world_to_screen_y,  # display
 
@@ -187,8 +187,8 @@ from appgamekit import (
     get_app_name,
     # get_app_package_name,  # Mobile only
     get_device_base_name as get_platform_name,
-    get_device_id as get_id,
-    get_device_language as get_language,
+    get_device_id,  # as get_id,
+    get_device_language,  # as get_language,
     # GetDeviceName  # Deprecated
     # get_device_network_type,  # Mobile only
     # get_device_platform,  # Android only
@@ -246,9 +246,9 @@ from appgamekit import (
     # get_color_red as _get_color_red,  # color
     # make_color as _make_color,  # color
 )
-from .enums import CameraType
-from .image import Image
-from typing import Optional
+from ._enums import CameraType
+from ._image import Image
+from typing import Optional as _Optional
 
 
 class App(object):
@@ -305,7 +305,7 @@ class Camera(object):
     def is_streaming(self) -> bool:
         return Camera.__streaming_camera_id == self.__id
 
-    def start_streaming(self) -> Optional[Image]:
+    def start_streaming(self) -> _Optional[Image]:
         """
         Returns an image onto which the camera streams.
 

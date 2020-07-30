@@ -15,9 +15,11 @@ Provides classes that encapsulate groups of AGK commands to allow for more rapid
 
 
 # noinspection PyUnresolvedReferences
-from appgamekit import Application
+from appgamekit import Application  # , create_window, destroy_window
 
-from .constants import *
+from ._constants import *
+from ._game import Game
+
 # # from ._2dphysics import *
 # from ._3d import Camera
 # from ._3dparticles import Particles3D
@@ -29,23 +31,23 @@ from . import display  # general
 # from ._file import Zip, File, Folder
 from . import file  # io
 from . import zipfile  # io
-from .font import Font
-from .http import *  # network?
-from .image import *  # general
+from ._font import Font
+from ._http import *  # network?
+from ._image import *  # general
 from .input import *  # general
-from .memblock import *  # general?
+from ._memblock import *  # general?
 # # from ._multiplayer import *
 from . import mixer  # audio
-from .music import Music  # audio
+from ._music import Music  # audio
 from . import qrcode
-from .particles import *  # 2d
-from .skeleton import Skeleton2D, Bone, Skeleton2DFileType  # 2d
-from .sound import Sound, SoundInstance  # audio
-from .sprite import Sprite, PhysicsMode, TransparencyMode  # 2d
-from .text import Text, HorizontalAlign
+from ._particles import *  # 2d
+from ._skeleton import Skeleton2D, Bone, Skeleton2DFileType  # 2d
+from ._sound import Sound, SoundInstance  # audio
+from ._sprite import Sprite, PhysicsMode, TransparencyMode  # 2d
+from ._text import Text, HorizontalAlign
 from . import time
-from .tweening import *
-from .vector3 import *  # 3d
+from ._tweening import *
+from ._vector3 import *  # 3d
 from . import video  # 2d
 
 # # from ._shader import *

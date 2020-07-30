@@ -29,7 +29,7 @@ from appgamekit import (
 )
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from .memblock import Memblock
+    from ._memblock import Memblock
 
 
 class SoundInstance(object):

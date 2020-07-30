@@ -84,13 +84,13 @@ from appgamekit import (
     # set_print_size,  # Move to device module?
     # set_print_spacing,  # Move to device module?
 )
-from .enums import (
+from ._enums import (
     HorizontalAlign,
     Filter,
     TransparencyMode,
 )
-from .font import Font
-from .image import Image
+from ._font import Font
+from ._image import Image
 from typing import Optional, Sequence, Tuple, Union
 
 

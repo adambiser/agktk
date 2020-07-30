@@ -22,7 +22,7 @@ from appgamekit import (
 )
 from . import mixer
 # noinspection PyUnresolvedReferences
-from .constants import (
+from ._constants import (
     SEEK_ABSOLUTE,
     SEEK_RELATIVE,
 )

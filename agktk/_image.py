@@ -45,7 +45,7 @@ from appgamekit import (
     # Memblock > Image
     create_image_id_from_memblock as _create_image_id_from_memblock,
 )
-from .enums import (
+from ._enums import (
     Filter,
     TextureWrap,
     ColorChannel,
@@ -60,7 +60,7 @@ from typing import (
     TYPE_CHECKING
 )
 if TYPE_CHECKING:
-    from .memblock import Memblock
+    from ._memblock import Memblock
 
 
 class Image:

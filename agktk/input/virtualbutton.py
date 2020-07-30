@@ -19,11 +19,11 @@ from appgamekit import (
     set_virtual_button_text as _set_virtual_button_text,
     set_virtual_button_visible as _set_virtual_button_visible,
 )
-from agktk.constants import (
+from agktk._constants import (
     STATE_UP as _STATE_UP,
     STATE_DOWN as _STATE_DOWN,
 )
-from agktk.image import Image
+from agktk._image import Image
 from typing import Optional, Tuple, Union
 
 

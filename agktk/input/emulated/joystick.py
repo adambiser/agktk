@@ -14,7 +14,7 @@ from appgamekit import (
     get_button_state as _get_button_state,
     set_button_screen_position,
 )
-from ...constants import (
+from ..._constants import (
     STATE_UP as _STATE_UP,
     STATE_DOWN as _STATE_DOWN,
 )

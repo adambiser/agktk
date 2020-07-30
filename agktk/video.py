@@ -26,10 +26,10 @@ from appgamekit import (
     set_video_volume as set_volume,
     stop_video as stop,
 )
-from .enums import VideoLoadResult
+from ._enums import VideoLoadResult
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from .image import Image
+    from ._image import Image
 
 
 def play_youtube_video(video_id: str, start_time: float = 0):

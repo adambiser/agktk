@@ -76,7 +76,7 @@ from appgamekit import (
     delete_socket_listener as _delete_socket_listener,
     get_socket_listener_connection as _get_socket_listener_connection,
 )
-from .enums import SocketState, VariableType
+from ._enums import SocketState, VariableType
 from typing import List
 
 

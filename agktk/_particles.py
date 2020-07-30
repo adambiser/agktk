@@ -48,12 +48,12 @@ from appgamekit import (
     set_particles_visible as _set_particles_visible,
     update_particles as _update_particles,
 )
-from .enums import (
+from ._enums import (
     InterpolationMode,
     RotationMode,
     TransparencyMode,
 )
-from .image import Image
+from ._image import Image
 from typing import Optional
 
 

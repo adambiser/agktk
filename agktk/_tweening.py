@@ -140,8 +140,8 @@ from appgamekit import (
     set_tween_sprite_y_by_offset as _set_tween_sprite_y_by_offset,
     stop_tween_sprite as _stop_tween_sprite,
 )
-from .sprite import Sprite
-from .text import Text
+from ._sprite import Sprite
+from ._text import Text
 # from .constants import (
 #     # Tweening > Interpolation
 #     TWEEN_BOUNCE,
@@ -154,7 +154,7 @@ from .text import Text
 #     TWEEN_SMOOTH1,
 #     TWEEN_SMOOTH2,
 # )
-from .enums import TweenInterpolation
+from ._enums import TweenInterpolation
 
 
 # TODO Implement

@@ -2,7 +2,7 @@
 from appgamekit import (
     # Core > Display
     clear_depth_buffer,
-    clear_screen as clear,
+    clear_screen,
     enable_clear_color,
     enable_clear_depth,
     get_display_aspect,
@@ -21,7 +21,7 @@ from appgamekit import (
     render_2d_front,
     render_3d,
     render_shadow_map,
-    screen_fps as get_fps,
+    screen_fps,
     screen_to_world_x,
     screen_to_world_y,
     set_border_color,
@@ -31,7 +31,7 @@ from appgamekit import (
     set_render_to_screen,
     set_resolution_mode,
     set_scissor,
-    set_screen_resolution as set_resolution,
+    set_screen_resolution,
     set_sync_rate,
     set_vsync,
     set_view_offset,
@@ -71,9 +71,18 @@ from appgamekit import (
     # make_color as _make_color,  # color
 
     # Text > Print
-    print_value as print,
+    print_value,
     set_print_color,
-    set_print_font,
+    set_print_font as _set_print_font,
     set_print_size,
     set_print_spacing,
 )
+from ._font import Font
+
+__print_font = None
+
+
+def set_print_font(font: Font):
+    global __print_font
+    __print_font = font
+    _set_print_font(font.id)
