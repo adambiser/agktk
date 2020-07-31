@@ -10,7 +10,10 @@ from appgamekit import (
     get_last_error,
     log,
     set_error_mode,
+
+    # Python only
     enable_debug_log,
+    import_plugin,
 
     # HTTP > General
     get_internet_state as has_internet,
@@ -267,11 +270,11 @@ def start_app(filename: str, parameters: str = None) -> App:
     return App(filename, parameters)
 
 
-class Camera(object):
+class DeviceCamera(object):
     """
     Wraps AppGameKit device camera methods.
     """
-    __streaming_camera_id = None
+    __stream_image = None
 
     def __init__(self, camera_id: int = 0):
         self.__id = camera_id
@@ -303,7 +306,7 @@ class Camera(object):
 
     @property
     def is_streaming(self) -> bool:
-        return Camera.__streaming_camera_id == self.__id
+        return DeviceCamera.__stream_image is not None
 
     def start_streaming(self) -> _Optional[Image]:
         """
@@ -315,11 +318,12 @@ class Camera(object):
         image = Image()
         if not _set_device_camera_to_image(_id, image.id):
             return None
-        Camera.__streaming_camera_id = _id
+        # Store the stream image so calling code doesn't have to.
+        DeviceCamera.__stream_image = image
         return image
 
     def stop_streaming(self):
         _id = self.__id
-        if Camera.__streaming_camera_id == _id:
-            Camera.__streaming_camera_id = 0
+        if DeviceCamera.__stream_image is not None:
             _set_device_camera_to_image(_id, 0)
+            DeviceCamera.__stream_image = None

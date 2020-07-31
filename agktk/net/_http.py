@@ -4,9 +4,6 @@ Contains HTTP connection functionality.
 
 # noinspection PyUnresolvedReferences
 from appgamekit import (
-    # HTTP > Encoding
-    http_decode as url_decode,
-    http_encode as url_encode,
     # HTTP > General
     add_http_header as _add_http_header,
     close_http_connection as _close_http_connection,
@@ -28,7 +25,7 @@ from appgamekit import (
     set_http_timeout as _set_http_timeout,
     set_http_verify_certificate as _set_http_verify_certificate,
 )
-from ._enums import HttpResponseState
+from agktk._enums import HttpResponseState
 
 
 class HttpConnection(object):

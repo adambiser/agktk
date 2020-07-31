@@ -1,3 +1,4 @@
+# TODO Make method, classmethod of Image?
 # Image > QR
 from appgamekit import (
     decode_qr_code as _decode_qr_code,

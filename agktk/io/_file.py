@@ -1,13 +1,4 @@
-# noinspection PyUnresolvedReferences
-# TODO
-#   Move some of this to device?
-#   device.io.FileReader
-#   device.get_folders()
-#   device.get_read_path()
-#   device.io.path.is_absolute
 from appgamekit import (
-    # File > Zip
-    #   See zipfile
     # File > Read
     file_eof as _file_eof,
     open_to_read as _open_to_read,
@@ -17,12 +8,6 @@ from appgamekit import (
     read_line as _read_line,
     read_string as _read_string,
     read_string2 as _read_string2,
-    # File > Paths
-    count_windows_drives as _count_windows_drives,
-    get_windows_drive as _get_windows_drive,
-    is_absolute_path,
-    join_paths,
-    simplify_path,
     # File > Write
     open_to_write as _open_to_write,
     write_byte as _write_byte,
@@ -31,65 +16,13 @@ from appgamekit import (
     write_line as _write_line,
     write_string as _write_string,
     write_string2 as _write_string2,
-    # File > Directory Raw
-    close_raw_folder as _close_raw_folder,
-    get_raw_folder_file_name as _get_raw_folder_file_name,
-    get_raw_folder_folder_name as _get_raw_folder_folder_name,
-    get_raw_folder_num_files as _get_raw_folder_num_files,
-    get_raw_folder_num_folders as _get_raw_folder_num_folders,
-    open_raw_folder as _open_raw_folder,
-    # File > Directory
-    get_file_count as _get_file_count,
-    get_first_file as _get_first_file,
-    get_first_folder as _get_first_folder,
-    get_folder_count as _get_folder_count,
-    get_next_file as _get_next_file,
-    get_next_folder as _get_next_folder,
-    delete_folder,
-    get_folder,
-    make_folder,
-    set_folder,
     # File > Access
-    choose_raw_file,
-    delete_file,
-    get_documents_path,
-    get_file_exists,
-    get_read_path,
-    get_write_path,
     close_file as _close_file,
     file_is_open as _file_is_open,
     get_file_pos as _get_file_pos,
     get_file_size as _get_file_size,
     set_file_pos as _set_file_pos,
 )
-from ._enums import FolderMode
-
-
-def get_windows_drives():
-    for index in range(_count_windows_drives()):
-        yield _get_windows_drive(index)
-
-
-def get_file_count(mode: FolderMode = FolderMode.BOTH):
-    return _get_file_count(mode)
-
-
-def get_files(mode: FolderMode = FolderMode.BOTH):
-    f = _get_first_file(mode)
-    while f:
-        yield f
-        f = _get_next_file()
-
-
-def get_folder_count(mode: FolderMode = FolderMode.BOTH):
-    return _get_folder_count(mode)
-
-
-def get_folders(mode: FolderMode = FolderMode.BOTH):
-    f = _get_first_folder(mode)
-    while f:
-        yield f
-        f = _get_next_folder()
 
 
 class FileReader(object):
@@ -124,8 +57,8 @@ class FileReader(object):
     def close(self):
         _id = self.__id
         if _id:
-            _close_file(_id)
             self.__id = 0
+            _close_file(_id)
 
     @property
     def is_open(self) -> bool:
@@ -233,8 +166,8 @@ class FileWriter(object):
     def close(self):
         _id = self.__id
         if _id:
-            _close_file(_id)
             self.__id = 0
+            _close_file(_id)
 
     @property
     def is_open(self) -> bool:
@@ -269,45 +202,3 @@ class FileWriter(object):
 
     def write_string2(self, value: str):
         _write_string2(self.__id, value)
-
-
-class RawFolder(object):
-    """
-    Wraps AppGameKit raw folder methods.
-    """
-
-    def __init__(self, path: str):
-        self.__id = _open_raw_folder(path)
-
-    def __del__(self):
-        """Deletes the object."""
-        try:
-            _close_raw_folder(self.__id)
-        except TypeError:
-            pass
-
-    def __repr__(self):
-        return f"<{self.__class__.__name__}, id: {self.__id}>"
-
-    @property
-    def id(self) -> int:
-        """The internal ID for this object."""
-        return self.__id
-
-    @property
-    def file_count(self) -> int:
-        return _get_raw_folder_num_files(self.__id)
-
-    @property
-    def files(self):
-        for index in range(0, _get_raw_folder_num_files(self.__id)):
-            yield _get_raw_folder_file_name(self.__id, index)
-
-    @property
-    def folder_count(self) -> int:
-        return _get_raw_folder_num_folders(self.__id)
-
-    @property
-    def folders(self):
-        for index in range(0, _get_raw_folder_num_folders(self.__id)):
-            yield _get_raw_folder_folder_name(self.__id, index)

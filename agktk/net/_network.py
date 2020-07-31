@@ -76,8 +76,8 @@ from appgamekit import (
     delete_socket_listener as _delete_socket_listener,
     get_socket_listener_connection as _get_socket_listener_connection,
 )
-from ._enums import SocketState, VariableType
-from typing import List
+from agktk._enums import SocketState, VariableType
+from typing import List as _List
 
 
 class NetworkMessage(object):
@@ -314,7 +314,7 @@ class Network(object):
         return _get_network_num_clients(self.__id)
 
     @property
-    def clients(self) -> List[NetworkClient]:
+    def clients(self) -> _List[NetworkClient]:
         # All clients must be read at once or the internal network code can't continue processing.
         network_id = self.__id
 

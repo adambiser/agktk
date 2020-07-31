@@ -30,7 +30,7 @@ from ._constants import (
 
 class Music(object):
     """Wraps OGG music functionality."""
-    __is_first_instance = True
+    # __is_first_instance = True
 
     def __init__(self, filename: str):
         self.__id = _load_music_ogg(filename)
@@ -39,8 +39,19 @@ class Music(object):
         # if Music.__is_first_instance and MusicSystem.volume != 100:
         #     Music.__is_first_instance = False
         #     MusicSystem.volume = MusicSystem.volume
-        if Music.__is_first_instance:
-            mixer.refresh()
+        # if Music.__is_first_instance:
+        #     Music.__is_first_instance = False
+        #     mixer.refresh()
+        try:
+            self.__class__.__first_time()
+        except AttributeError:
+            pass
+
+    @classmethod
+    def __first_time(cls):
+        print("__first_time")
+        del cls.__first_time
+        mixer.refresh()
 
     def __del__(self):
         """Delete the object."""

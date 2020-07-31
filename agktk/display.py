@@ -83,6 +83,7 @@ __print_font = None
 
 
 def set_print_font(font: Font):
+    # Store the font so it doesn't get deleted.
     global __print_font
     __print_font = font
     _set_print_font(font.id)

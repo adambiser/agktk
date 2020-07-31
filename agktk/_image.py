@@ -35,7 +35,7 @@ from appgamekit import (
     set_image_wrap_u,
     set_image_wrap_v,
     # Image > Capture
-    #   See device.Camera
+    #   See device.DeviceCamera
     # Image > QR
     # See qrcode
     # Image > Modify
@@ -50,7 +50,6 @@ from ._enums import (
     TextureWrap,
     ColorChannel,
     RenderImageType,
-    # DeviceCameraType,
 )
 from ._utils import iter_id
 from typing import (
@@ -303,38 +302,3 @@ class Image:
         image = Image()
         _create_image_id_from_memblock(image.__id, memblock.id)
         return image
-
-# class DeviceCamera:
-#     """
-#     Wraps functionality of device camera used to take snapshots.
-#
-#     ID 0 is usually the back facing camera.
-#
-#     Only one device camera can be active at once.
-#     """
-#     @staticmethod
-#     def exists() -> bool:
-#         """Returns whether the device has a camera."""
-#         return get_camera_exists()
-#
-#     @staticmethod
-#     def get_type(camera_id: int) -> DeviceCameraType:
-#         """Returns the camera type for the given device camera ID."""
-#         return DeviceCameraType(get_device_camera_type(camera_id))
-#
-#     @staticmethod
-#     def get_count() -> int:
-#         """Returns the number of cameras available for start_capture."""
-#         return get_num_device_cameras()
-#
-#     @staticmethod
-#     def stop_capture():
-#         """Stops streaming from the device camera and deletes the image being streamed to."""
-#         set_device_camera_to_image(0, 0)
-#
-#     @staticmethod
-#     def start_capture(camera_id: int, image: Image) -> bool:
-#         """Streams the device camera to the chosen image, which must be an empty Image."""
-#         return set_device_camera_to_image(camera_id, image.id)
-#
-#

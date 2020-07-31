@@ -1,4 +1,5 @@
-"""Wrapper classes for AppGameKit.
+"""
+Wrapper classes for AppGameKit.
 
 Provides classes that encapsulate groups of AGK commands to allow for more rapid development.
 """
@@ -20,23 +21,14 @@ from appgamekit import Application  # , create_window, destroy_window
 from ._constants import *
 from ._game import Game
 
-# # from ._2dphysics import *
-# from ._3d import Camera
-# from ._3dparticles import Particles3D
-# # from ._3dphysics import *
-# # Adverts - Skipped
-from . import device  # general
-from . import display  # general
-# # Extras - Skipped
-# from ._file import Zip, File, Folder
-from . import file  # io
-from . import zipfile  # io
+from . import device
+from . import display
+from . import io
 from ._font import Font
-from ._http import *  # network?
-from ._image import *  # general
-from .input import *  # general
+from . import net  # network?
+from ._image import *
+from .input import *
 from ._memblock import *  # general?
-# # from ._multiplayer import *
 from . import mixer  # audio
 from ._music import Music  # audio
 from . import qrcode
@@ -45,10 +37,9 @@ from ._skeleton import Skeleton2D, Bone, Skeleton2DFileType  # 2d
 from ._sound import Sound, SoundInstance  # audio
 from ._sprite import Sprite, PhysicsMode, TransparencyMode  # 2d
 from ._text import Text, HorizontalAlign
-from . import time
+from . import time  # general
 from ._tweening import *
 from ._vector3 import *  # 3d
 from . import video  # 2d
 
 # # from ._shader import *
-

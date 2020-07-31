@@ -2,6 +2,7 @@ from appgamekit import (
     # create_window as _create_window,
     destroy_window as _destroy_window,
     Application as _Application,
+    # get_paused,
 )
 from typing import Optional, Any
 
@@ -11,6 +12,10 @@ class Game(_Application):
                  height: Optional[int] = 768, fullscreen: Optional[bool] = False, company_name: str = None,
                  app_name: str = None, show_appgamekit_logo: Optional[bool] = False) -> None:
         super().__init__(x, y, width, height, fullscreen, company_name, app_name, show_appgamekit_logo)
+
+    # @property
+    # def is_paused(self) -> bool:
+    #     return get_paused()
 
     def run(self):
         """
@@ -33,5 +38,3 @@ class Game(_Application):
         :return: True to break the loop.
         """
         raise NotImplementedError("Your game needs to overwrite the loop method.")
-
-
