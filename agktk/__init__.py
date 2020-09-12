@@ -3,6 +3,8 @@ Wrapper classes for AppGameKit.
 
 Provides classes that encapsulate groups of AGK commands to allow for more rapid development.
 """
+__version__ = "0.2"
+
 # Import agk functions like this to make calling them faster.
 
 # from ._methods import *
