@@ -6,7 +6,9 @@ This module sets Text.use_new_default_fonts to True on import.
 from appgamekit import (
     # Text > Creation
     create_text as _create_text,
+    # create_text_id,  # Not needed.
     delete_text as _delete_text,
+    # delete_all_text,  # Not needed.
     # Text > Properties
     draw_text as _draw_text,
     fix_text_to_screen as _fix_text_to_screen,
@@ -84,13 +86,13 @@ from appgamekit import (
     # set_print_size,  # Move to device module?
     # set_print_spacing,  # Move to device module?
 )
-from ._enums import (
+from agktk._enums import (
     HorizontalAlign,
     Filter,
     TransparencyMode,
 )
-from ._font import Font
-from ._image import Image
+from .font import Font
+from .image import Image
 from typing import Optional, Sequence, Tuple, Union
 
 

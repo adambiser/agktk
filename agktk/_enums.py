@@ -126,6 +126,13 @@ class Filter(_IntEnum):
     LINEAR = appgamekit.FILTER_LINEAR
 
 
+# HTTP response status - get_http_response_ready
+class HttpResponseState(_IntEnum):
+    FAILED = appgamekit.HTTP_RESPONSE_STATUS_FAILED
+    IN_PROGRESS = appgamekit.HTTP_RESPONSE_STATUS_IN_PROGRESS
+    COMPLETED = appgamekit.HTTP_RESPONSE_STATUS_COMPLETED
+
+
 # Text input state - returned by get_text_input_state
 class TextInputState(_IntEnum):
     ACTIVE = appgamekit.INPUT_TEXT_ACTIVE
@@ -149,24 +156,6 @@ class KeyboardType(_IntEnum):
     NONE = appgamekit.KEYBOARD_NONE
     FULL_SIZE = appgamekit.KEYBOARD_FULL_SIZE
     VIRTUAL = appgamekit.KEYBOARD_VIRTUAL
-
-
-class HttpResponseState(_IntEnum):
-    FAILED = -1
-    IN_PROGRESS = 0
-    COMPLETED = 1
-
-
-class VideoLoadResult(_IntEnum):
-    UNSUPPORTED = -1
-    ERROR = 0
-    SUCCESS = 1
-
-
-class SocketState(_IntEnum):
-    DISCONNECTED = -1
-    CONNECTING = 0
-    CONNECTED = 1
 
 
 # Network variable types - set_network_local_float, set_network_local_integer
@@ -197,6 +186,14 @@ class PointLightMode(_IntEnum):
     PIXEL = appgamekit.POINT_LIGHT_PIXEL
 
 
+# Anisotropic friction modes - set_object_3d_physics_anisotropic_friction
+# TODO Use appgamekit constants once added to PYD.
+class AnisotropicFrictionMode(_IntEnum):
+    DISABLED = 0
+    FRICTION = 1
+    ROLLING_FRICTION = 2
+
+
 # Ray cast contact - ray_cast_3d_physics, ray_cast_3d_physics_object
 class RayCastMode(_IntEnum):
     CLOSEST = appgamekit.RAY_CAST_CLOSEST
@@ -225,7 +222,7 @@ class SeekMode(_IntEnum):
 class ShadowMappingMode(_IntEnum):
     NONE = appgamekit.SHADOW_MAP_NONE
     UNIFORM = appgamekit.SHADOW_MAP_UNIFORM
-    LIPSM = appgamekit.SHADOW_MAP_LIPSM
+    LISPSM = appgamekit.SHADOW_MAP_LISPSM
     CASCADE = appgamekit.SHADOW_MAP_CASCADE
 
 
@@ -242,6 +239,13 @@ class SpriteShape(_IntEnum):
     CIRCLE = appgamekit.SHAPE_CIRCLE
     BOX = appgamekit.SHAPE_BOX
     POLYGON = appgamekit.SHAPE_POLYGON
+
+
+# Socket states - get_socket_connected
+class SocketState(_IntEnum):
+    DISCONNECTED = appgamekit.SOCKET_STATE_DISCONNECTED
+    CONNECTING = appgamekit.SOCKET_STATE_CONNECTING
+    CONNECTED = appgamekit.SOCKET_STATE_CONNECTED
 
 
 # Key, button, and pointer states - returned by get_button_state, get_pointer_state, get_virtual_button_state,
@@ -276,6 +280,7 @@ class TransparencyMode(_IntEnum):
 
 # Tween interpolation types - the set_tween_* methods
 class TweenInterpolation(_IntEnum):
+    OFF = appgamekit.TWEEN_OFF
     LINEAR = appgamekit.TWEEN_LINEAR
     SMOOTH1 = appgamekit.TWEEN_SMOOTH1
     SMOOTH2 = appgamekit.TWEEN_SMOOTH2
@@ -285,6 +290,13 @@ class TweenInterpolation(_IntEnum):
     EASE_OUT2 = appgamekit.TWEEN_EASE_OUT2
     BOUNCE = appgamekit.TWEEN_BOUNCE
     OVERSHOOT = appgamekit.TWEEN_OVERSHOOT
+
+
+# Video load responses - load_video
+class VideoLoadResult(_IntEnum):
+    UNSUPPORTED = appgamekit.VIDEO_LOAD_UNSUPPORTED
+    ERROR = appgamekit.VIDEO_LOAD_ERROR
+    SUCCESS = appgamekit.VIDEO_LOAD_SUCCESS
 
 
 # UV Texture wrapping modes - set_default_wrap_u, set_default_wrap_v, set_image_wrap_u, set_image_wrap_v

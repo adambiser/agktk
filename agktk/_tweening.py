@@ -1,3 +1,4 @@
+# noinspection PyUnresolvedReferences
 from appgamekit import (
     # Tweening > Chains
     add_tween_chain_camera as _add_tween_chain_camera,
@@ -8,6 +9,7 @@ from appgamekit import (
     add_tween_chain_text as _add_tween_chain_text,
     clear_tween_chain as _clear_tween_chain,
     create_tween_chain as _create_tween_chain,
+    # create_tween_chain_id,  # Not needed.
     delete_tween_chain as _delete_tween_chain,
     get_tween_chain_end_time as _get_tween_chain_end_time,
     get_tween_chain_playing as _get_tween_chain_playing,
@@ -17,6 +19,7 @@ from appgamekit import (
     stop_tween_chain as _stop_tween_chain,
     # Tweening > Objects
     create_tween_object as _create_tween_object,
+    # create_tween_object_id,  # Not needed.
     # get_tween_object_exists,  # not needed
     get_tween_object_playing as _get_tween_object_playing,
     pause_tween_object as _pause_tween_object,
@@ -38,6 +41,7 @@ from appgamekit import (
     stop_tween_object as _stop_tween_object,
     # Tweening > Char
     create_tween_char as _create_tween_char,
+    # create_tween_char_id,  # Not needed.
     # get_tween_char_exists,  # not needed
     get_tween_char_playing as _get_tween_char_playing,
     pause_tween_char as _pause_tween_char,
@@ -55,7 +59,7 @@ from appgamekit import (
     delete_tween as _delete_tween,
     # get_tween_exists,  # not needed
     set_tween_duration as _set_tween_duration,
-    update_all_tweens,  # as _update_all_tweens,
+    update_all_tweens,
     update_tween_camera as _update_tween_camera,
     update_tween_chain as _update_tween_chain,
     update_tween_char as _update_tween_char,
@@ -65,6 +69,7 @@ from appgamekit import (
     update_tween_text as _update_tween_text,
     # Tweening > Cameras
     create_tween_camera as _create_tween_camera,
+    # create_tween_camera_id,  # Not needed.
     # get_tween_camera_exists,  # not needed
     get_tween_camera_playing as _get_tween_camera_playing,
     pause_tween_camera as _pause_tween_camera,
@@ -80,6 +85,7 @@ from appgamekit import (
     stop_tween_camera as _stop_tween_camera,
     # Tweening > Custom
     create_tween_custom as _create_tween_custom,
+    # create_tween_custom_id,  # Not needed.
     # get_tween_custom_exists,  # not needed
     get_tween_custom_float1 as _get_tween_custom_float1,
     get_tween_custom_float2 as _get_tween_custom_float2,
@@ -102,8 +108,19 @@ from appgamekit import (
     set_tween_custom_integer3 as _set_tween_custom_integer3,
     set_tween_custom_integer4 as _set_tween_custom_integer4,
     stop_tween_custom as _stop_tween_custom,
+    # Tweening > Interpolation
+    # tween_bounce,  # Not needed.  Use TweenInterpolation enum
+    # tween_ease_in1,  # Not needed.  Use TweenInterpolation enum
+    # tween_ease_in2,  # Not needed.  Use TweenInterpolation enum
+    # tween_ease_out1,  # Not needed.  Use TweenInterpolation enum
+    # tween_ease_out2,  # Not needed.  Use TweenInterpolation enum
+    # tween_linear,  # Not needed.  Use TweenInterpolation enum
+    # tween_overshoot,  # Not needed.  Use TweenInterpolation enum
+    # tween_smooth1,  # Not needed.  Use TweenInterpolation enum
+    # tween_smooth2,  # Not needed.  Use TweenInterpolation enum
     # Tweening > Text
     create_tween_text as _create_tween_text,
+    # create_tween_text_id,  # Not needed.
     # get_tween_text_exists,  # not needed
     get_tween_text_playing as _get_tween_text_playing,
     pause_tween_text as _pause_tween_text,
@@ -122,6 +139,7 @@ from appgamekit import (
     stop_tween_text as _stop_tween_text,
     # Tweening > Sprites
     create_tween_sprite as _create_tween_sprite,
+    # create_tween_sprite_id,  # Not needed.
     # get_tween_sprite_exists,  # not needed
     get_tween_sprite_playing as _get_tween_sprite_playing,
     pause_tween_sprite as _pause_tween_sprite,
@@ -140,185 +158,173 @@ from appgamekit import (
     set_tween_sprite_y_by_offset as _set_tween_sprite_y_by_offset,
     stop_tween_sprite as _stop_tween_sprite,
 )
-from ._sprite import Sprite
-from ._text import Text
-# from .constants import (
-#     # Tweening > Interpolation
-#     TWEEN_BOUNCE,
-#     TWEEN_EASE_IN1,
-#     TWEEN_EASE_IN2,
-#     TWEEN_EASE_OUT1,
-#     TWEEN_EASE_OUT2,
-#     TWEEN_LINEAR,
-#     TWEEN_OVERSHOOT,
-#     TWEEN_SMOOTH1,
-#     TWEEN_SMOOTH2,
-# )
 from ._enums import TweenInterpolation
+from ._grfx.sprite import Sprite
+from ._grfx.text import Text
+from ._grfx3d.object3d import Object3D
+from ._grfx3d.camera import Camera3D
 
 
-# TODO Implement
-# class CameraTween(object):
-#     """
-#     A tween for manipulating cameras.
-#     """
-#     def __init__(self, duration: float):
-#         self.__id = _create_tween_camera(duration)
-#         self.__duration = duration
-#
-#     def __del__(self):
-#         """Deletes the object."""
-#         try:
-#             _delete_tween(self.__id)
-#         except TypeError:
-#             pass
-#
-#     def __repr__(self):
-#         return f"<{self.__class__.__name__}, id: {self.__id}>"
-#
-#     @property
-#     def id(self) -> int:
-#         """The internal ID for this object."""
-#         return self.__id
-#
-#     @property
-#     def duration(self) -> float:
-#         return self.__duration
-#
-#     @duration.setter
-#     def duration(self, value: float):
-#         self.__duration = value
-#         _set_tween_duration(self.__id, value)
-#
-#     def is_playing(self, camera: Camera) -> bool:
-#         return _get_tween_camera_playing(self.__id, obj.id)
-#
-#     def pause(self, camera: Camera):
-#         _pause_tween_camera(self.__id, camera.id)
-#
-#     def play(self, camera: Camera, delay: float = 0):
-#         _play_tween_camera(self.__id, camera.id, delay)
-#
-#     def resume(self, camera: Camera):
-#         _resume_tween_camera(self.__id, camera.id)
-#
-#     def stop(self, camera: Camera):
-#         _stop_tween_camera(self.__id, camera.id)
-#
-#     def update(self, camera: Camera, time: float):
-#         _update_tween_camera(self.__id, camera.id, time)
-#
-#     def set_angle_x(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_camera_angle_x(self.__id, begin, end, interpolation)
-#
-#     def set_angle_y(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_camera_angle_y(self.__id, begin, end, interpolation)
-#
-#     def set_angle_z(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_camera_angle_z(self.__id, begin, end, interpolation)
-#
-#     def set_fov(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_camera_fov(self.__id, begin, end, interpolation)
-#
-#     def set_x(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_camera_x(self.__id, begin, end, interpolation)
-#
-#     def set_y(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_camera_y(self.__id, begin, end, interpolation)
-#
-#     def set_z(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_camera_z(self.__id, begin, end, interpolation)
+class CameraTween(object):
+    """
+    A tween for manipulating cameras.
+    """
+    def __init__(self, duration: float):
+        self.__id = _create_tween_camera(duration)
+        self.__duration = duration
+
+    def __del__(self):
+        """Deletes the object."""
+        try:
+            _delete_tween(self.__id)
+        except TypeError:
+            pass
+
+    def __repr__(self):
+        return f"<{self.__class__.__name__}, id: {self.__id}>"
+
+    @property
+    def id(self) -> int:
+        """The internal ID for this object."""
+        return self.__id
+
+    @property
+    def duration(self) -> float:
+        return self.__duration
+
+    @duration.setter
+    def duration(self, value: float):
+        self.__duration = value
+        _set_tween_duration(self.__id, value)
+
+    def is_playing(self, camera: Camera3D) -> bool:
+        return _get_tween_camera_playing(self.__id, camera.id)
+
+    def pause(self, camera: Camera3D):
+        _pause_tween_camera(self.__id, camera.id)
+
+    def play(self, camera: Camera3D, delay: float = 0):
+        _play_tween_camera(self.__id, camera.id, delay)
+
+    def resume(self, camera: Camera3D):
+        _resume_tween_camera(self.__id, camera.id)
+
+    def stop(self, camera: Camera3D):
+        _stop_tween_camera(self.__id, camera.id)
+
+    def update(self, camera: Camera3D, time: float):
+        _update_tween_camera(self.__id, camera.id, time)
+
+    def set_angle_x(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_camera_angle_x(self.__id, begin, end, interpolation)
+
+    def set_angle_y(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_camera_angle_y(self.__id, begin, end, interpolation)
+
+    def set_angle_z(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_camera_angle_z(self.__id, begin, end, interpolation)
+
+    def set_fov(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_camera_fov(self.__id, begin, end, interpolation)
+
+    def set_x(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_camera_x(self.__id, begin, end, interpolation)
+
+    def set_y(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_camera_y(self.__id, begin, end, interpolation)
+
+    def set_z(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_camera_z(self.__id, begin, end, interpolation)
 
 
-# TODO Implement
-# class ObjectTween(object):
-#     """
-#     A tween for manipulating object models.
-#     """
-#     def __init__(self, duration: float):
-#         self.__id = _create_tween_object(duration)
-#         self.__duration = duration
-#
-#     def __del__(self):
-#         """Deletes the object."""
-#         try:
-#             _delete_tween(self.__id)
-#         except TypeError:
-#             pass
-#
-#     def __repr__(self):
-#         return f"<{self.__class__.__name__}, id: {self.__id}>"
-#
-#     @property
-#     def id(self) -> int:
-#         """The internal ID for this object."""
-#         return self.__id
-#
-#     @property
-#     def duration(self) -> float:
-#         return self.__duration
-#
-#     @duration.setter
-#     def duration(self, value: float):
-#         self.__duration = value
-#         _set_tween_duration(self.__id, value)
-#
-#     def is_playing(self, obj: ObjectModel) -> bool:
-#         return _get_tween_object_playing(self.__id, obj.id)
-#
-#     def pause(self, obj: ObjectModel):
-#         _pause_tween_object(self.__id, obj.id)
-#
-#     def play(self, obj: ObjectModel, delay: float = 0):
-#         _play_tween_object(self.__id, obj.id, delay)
-#
-#     def resume(self, obj: ObjectModel):
-#         _resume_tween_object(self.__id, obj.id)
-#
-#     def stop(self, obj: ObjectModel):
-#         _stop_tween_object(self.__id, obj.id)
-#
-#     def update(self, obj: ObjectModel, time: float):
-#         _update_tween_object(self.__id, obj.id, time)
-#
-#     def set_alpha(self, begin: int, end: int, interpolation: TweenInterpolation):
-#         _set_tween_object_alpha(self.__id, begin, end, interpolation)
-#
-#     def set_blue(self, begin: int, end: int, interpolation: TweenInterpolation):
-#         _set_tween_object_blue(self.__id, begin, end, interpolation)
-#
-#     def set_green(self, begin: int, end: int, interpolation: TweenInterpolation):
-#         _set_tween_object_green(self.__id, begin, end, interpolation)
-#
-#     def set_red(self, begin: int, end: int, interpolation: TweenInterpolation):
-#         _set_tween_object_red(self.__id, begin, end, interpolation)
-#
-#     def set_angle_x(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_object_angle_x(self.__id, begin, end, interpolation)
-#
-#     def set_angle_y(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_object_angle_y(self.__id, begin, end, interpolation)
-#
-#     def set_angle_z(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_object_angle_z(self.__id, begin, end, interpolation)
-#
-#     def set_scale_x(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_object_scale_x(self.__id, begin, end, interpolation)
-#
-#     def set_scale_y(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_object_scale_y(self.__id, begin, end, interpolation)
-#
-#     def set_scale_z(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_object_scale_z(self.__id, begin, end, interpolation)
-#
-#     def set_x(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_object_x(self.__id, begin, end, interpolation)
-#
-#     def set_y(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_object_y(self.__id, begin, end, interpolation)
-#
-#     def set_z(self, begin: float, end: float, interpolation: TweenInterpolation):
-#         _set_tween_object_z(self.__id, begin, end, interpolation)
+class ObjectTween(object):
+    """
+    A tween for manipulating object 3d objects.
+    """
+    def __init__(self, duration: float):
+        self.__id = _create_tween_object(duration)
+        self.__duration = duration
+
+    def __del__(self):
+        """Deletes the object."""
+        try:
+            _delete_tween(self.__id)
+        except TypeError:
+            pass
+
+    def __repr__(self):
+        return f"<{self.__class__.__name__}, id: {self.__id}>"
+
+    @property
+    def id(self) -> int:
+        """The internal ID for this object."""
+        return self.__id
+
+    @property
+    def duration(self) -> float:
+        return self.__duration
+
+    @duration.setter
+    def duration(self, value: float):
+        self.__duration = value
+        _set_tween_duration(self.__id, value)
+
+    def is_playing(self, obj: Object3D) -> bool:
+        return _get_tween_object_playing(self.__id, obj.id)
+
+    def pause(self, obj: Object3D):
+        _pause_tween_object(self.__id, obj.id)
+
+    def play(self, obj: Object3D, delay: float = 0):
+        _play_tween_object(self.__id, obj.id, delay)
+
+    def resume(self, obj: Object3D):
+        _resume_tween_object(self.__id, obj.id)
+
+    def stop(self, obj: Object3D):
+        _stop_tween_object(self.__id, obj.id)
+
+    def update(self, obj: Object3D, time: float):
+        _update_tween_object(self.__id, obj.id, time)
+
+    def set_alpha(self, begin: int, end: int, interpolation: TweenInterpolation):
+        _set_tween_object_alpha(self.__id, begin, end, interpolation)
+
+    def set_blue(self, begin: int, end: int, interpolation: TweenInterpolation):
+        _set_tween_object_blue(self.__id, begin, end, interpolation)
+
+    def set_green(self, begin: int, end: int, interpolation: TweenInterpolation):
+        _set_tween_object_green(self.__id, begin, end, interpolation)
+
+    def set_red(self, begin: int, end: int, interpolation: TweenInterpolation):
+        _set_tween_object_red(self.__id, begin, end, interpolation)
+
+    def set_angle_x(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_object_angle_x(self.__id, begin, end, interpolation)
+
+    def set_angle_y(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_object_angle_y(self.__id, begin, end, interpolation)
+
+    def set_angle_z(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_object_angle_z(self.__id, begin, end, interpolation)
+
+    def set_scale_x(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_object_scale_x(self.__id, begin, end, interpolation)
+
+    def set_scale_y(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_object_scale_y(self.__id, begin, end, interpolation)
+
+    def set_scale_z(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_object_scale_z(self.__id, begin, end, interpolation)
+
+    def set_x(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_object_x(self.__id, begin, end, interpolation)
+
+    def set_y(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_object_y(self.__id, begin, end, interpolation)
+
+    def set_z(self, begin: float, end: float, interpolation: TweenInterpolation):
+        _set_tween_object_z(self.__id, begin, end, interpolation)
 
 
 class CharTween(object):
@@ -717,10 +723,9 @@ class TweenChain(object):
     def set_time(self, time: float):
         _set_tween_chain_time(self.__id, time)
 
-    # TODO Implement
-    # def add_camera_tween(self, tween: CameraTween, camera: Camera, delay: float = 0):
-    #     self.__tweens.append(tween)
-    #     _add_tween_chain_camera(self.__id, tween.id, camera.id, delay)
+    def add_camera_tween(self, tween: CameraTween, camera: Camera3D, delay: float = 0):
+        self.__tweens.append(tween)
+        _add_tween_chain_camera(self.__id, tween.id, camera.id, delay)
 
     def add_char_tween(self, tween: CharTween, text: Text, char_index: int, delay: float = 0):
         self.__tweens.append(tween)
@@ -730,10 +735,9 @@ class TweenChain(object):
         self.__tweens.append(tween)
         _add_tween_chain_custom(self.__id, tween.id, delay)
 
-    # TODO Implement
-    # def add_object_tween(self, tween: ObjectTween, object_model: ObjectModel, delay: float = 0):
-    #     self.__tweens.append(tween)
-    #     _add_tween_chain_object(self.__id, tween.id, object_model.id, delay)
+    def add_object_tween(self, tween: ObjectTween, object3d: Object3D, delay: float = 0):
+        self.__tweens.append(tween)
+        _add_tween_chain_object(self.__id, tween.id, object3d.id, delay)
 
     def add_sprite_tween(self, tween: SpriteTween, sprite: Sprite, delay: float = 0):
         self.__tweens.append(tween)

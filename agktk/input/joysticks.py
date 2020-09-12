@@ -51,6 +51,12 @@ __LAST_ID = 8
 
 
 class Joystick(object):  # , metaclass=_JoystickMeta):
+    def __new__(cls, index, *args, **kwargs):
+        # Pass None if the raw joystick doesn't exist.
+        if not _get_raw_joystick_exists(index):
+            return None
+        return super().__new__(cls)
+
     def __init__(self, index: int):
         """Creates a joystick instance for the given index."""
         self.__id = index

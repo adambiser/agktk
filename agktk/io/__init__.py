@@ -54,6 +54,7 @@ def get_file_count(mode: FolderMode = FolderMode.BOTH):
 
 
 def get_files(mode: FolderMode = FolderMode.BOTH):
+    """Note: Finish using all of the results before using this generator again."""
     f = _get_first_file(mode)
     while f:
         yield f
@@ -65,6 +66,7 @@ def get_folder_count(mode: FolderMode = FolderMode.BOTH):
 
 
 def get_folders(mode: FolderMode = FolderMode.BOTH):
+    """Note: Finish using all of the results before using this generator again."""
     f = _get_first_folder(mode)
     while f:
         yield f

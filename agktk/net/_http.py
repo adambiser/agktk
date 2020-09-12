@@ -10,7 +10,7 @@ from appgamekit import (
     create_http_connection as _create_http_connection,
     delete_http_connection as _delete_http_connection,
     get_http_file as _get_http_file,
-    # get_http_file_complete,  # get_http_file_complete doesn't do anything get_http_response_ready doesn't do.
+    # get_http_file_complete,  # Not needed.  Doesn't do anything get_http_response_ready doesn't do.
     get_http_file_progress as _get_http_file_progress,
     get_http_response as _get_http_response,
     get_http_response_ready as _get_http_response_ready,

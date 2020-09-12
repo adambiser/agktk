@@ -20,98 +20,98 @@ from appgamekit import (
     open_browser,
 
     # Image > Capture
-    # GetCapturedImage,  # deprecated
+    # GetCapturedImage,  # Not needed.  Deprecated
     get_device_camera_type as _get_device_camera_type,
     get_num_device_cameras as get_camera_count,
-    # IsCapturingImage,  # deprecated
+    # IsCapturingImage,  # Not needed.  Deprecated
     set_device_camera_to_image as _set_device_camera_to_image,
-    # ShowImageCaptureScreen,  # deprecated
+    # ShowImageCaptureScreen,  # Not needed.  Deprecated
 
     # Input-Raw > Existence
-    # get_accelerometer_exists as has_accelerometer,  # input.sensors.accelerometer
+    # get_accelerometer_exists,  # See input.sensors.accelerometer
     get_camera_exists as has_camera,
-    # get_gps_sensor_exists,  # input.sensors.gps
-    # get_gyro_sensor_exists,  # input.sensors.gyro
-    # get_joystick_exists,  # input.joysticks
-    # get_keyboard_exists,  # input.keyboard
-    # get_light_sensor_exists,  # input.sensors.light
-    # get_magnetic_sensor_exists,  # input.sensors.magnetic
-    # get_mouse_exists,  # input.mouse
-    # get_multi_touch_exists,  # input.multitouch
-    # get_proximity_sensor_exists,  # input.proximity
-    # get_rotation_vector_sensor_exists,  # input.rotation
+    # get_gps_sensor_exists,  # See input.sensors.gps
+    # get_gyro_sensor_exists,  # See input.sensors.gyro
+    # get_joystick_exists,  # See input.joysticks
+    # get_keyboard_exists,  # See input.keyboard
+    # get_light_sensor_exists,  # See input.sensors.light
+    # get_magnetic_sensor_exists,  # See input.sensors.magnetic
+    # get_mouse_exists,  # See input.mouse
+    # get_multi_touch_exists,  # See input.multitouch
+    # get_proximity_sensor_exists,  # See input.proximity
+    # get_rotation_vector_sensor_exists,  # See input.rotation
 
     # Multiplayer > Properties
     get_device_ip as get_ip_address,
     get_device_ipv6 as get_ipv6_address,
 
     # Core > Display
-    # clear_depth_buffer,  # display
-    # clear_screen,  # display
-    # enable_clear_color,  # display
-    # enable_clear_depth,  # display
+    # clear_depth_buffer,  # See display
+    # clear_screen,  # See display
+    # enable_clear_color,  # See display
+    # enable_clear_depth,  # See display
     get_device_dpi,  # as get_dpi,
     get_device_height,  # as get_height,
     get_device_width,  # as get_width,
-    # get_display_aspect,  # display
+    # get_display_aspect,  # See display
     get_max_device_height,  # as get_max_height,
     get_max_device_width,  # as get_max_width,
     get_orientation,
     get_paused as is_paused,
-    # get_polygons_drawn,  # debug
-    # get_renderer_name,  # display
+    # get_polygons_drawn,  # See debug
+    # get_renderer_name,  # See display
     get_resumed as is_resumed,
-    # get_screen_bounds_bottom,  # display
-    # get_screen_bounds_left,  # display
-    # get_screen_bounds_right,  # display
-    # get_screen_bounds_top,  # display
-    # get_shadow_polygons_drawn,  # debug
-    # get_vertices_processed,  # debug
-    # get_view_offset_x,  # display
-    # get_view_offset_y,  # display
-    # get_view_zoom,  # display
-    # get_virtual_height,  # display
-    # get_virtual_width,  # display
+    # get_screen_bounds_bottom,  # See display
+    # get_screen_bounds_left,  # See display
+    # get_screen_bounds_right,  # See display
+    # get_screen_bounds_top,  # See display
+    # get_shadow_polygons_drawn,  # See debug
+    # get_vertices_processed,  # See debug
+    # get_view_offset_x,  # See display
+    # get_view_offset_y,  # See display
+    # get_view_zoom,  # See display
+    # get_virtual_height,  # See display
+    # get_virtual_width,  # See display
     get_window_height,
     get_window_width,
     is_supported_depth_texture as supports_depth_textures,
     maximize_window as maximize_app,
     minimize_app,
-    # render,  # display
-    # render_2d_back,  # display
-    # render_2d_front,  # display
-    # render_3d,  # display
-    # render_shadow_map,  # display
+    # render,  # See display
+    # render_2d_back,  # See display
+    # render_2d_front,  # See display
+    # render_3d,  # See display
+    # render_shadow_map,  # See display
     restore_app,
-    # screen_fps,  # display
-    # screen_to_world_x,  # display
-    # screen_to_world_y,  # display
-    # set_border_color,  # display
-    # set_clear_color,  # display
-    # set_display_aspect,  # display
-    # set_immersive_mode,  # Mobile only
-    # SetIntendedDeviceSize,  # Deprecated
+    # screen_fps,  # See display
+    # screen_to_world_x,  # See display
+    # screen_to_world_y,  # See display
+    # set_border_color,  # See display
+    # set_clear_color,  # See display
+    # set_display_aspect,  # See display
+    # set_immersive_mode,  # Not needed.  Mobile only
+    # SetIntendedDeviceSize,  # Not needed.  Deprecated
     set_orientation_allowed,
-    # set_render_to_image,  # display
-    # set_render_to_screen,  # display
-    # set_resolution_mode,  # display
-    # set_scissor,  # display
-    # set_screen_resolution,  # display
-    # set_sync_rate,  # display
-    # SetTransitionMode,  # Deprecated
-    # set_vsync,  # display
-    # set_view_offset,  # display
-    # set_view_zoom,  # display
-    # set_view_zoom_mode,  # display
-    # set_virtual_resolution,  # display
+    # set_render_to_image,  # See display
+    # set_render_to_screen,  # See display
+    # set_resolution_mode,  # See display
+    # set_scissor,  # See display
+    # set_screen_resolution,  # See display
+    # set_sync_rate,  # See display
+    # SetTransitionMode,  # Not needed.  Deprecated
+    # set_vsync,  # See display
+    # set_view_offset,  # See display
+    # set_view_zoom,  # See display
+    # set_view_zoom_mode,  # See display
+    # set_virtual_resolution,  # See display
     set_window_allow_resize,
     set_window_position,
     set_window_size,
-    # swap,  # display
-    # sync,  # display
+    # swap,  # See display
+    # sync,  # See display
     update_device_size,  # as update_size,
-    # world_to_screen_x,  # display
-    # world_to_screen_y,  # display
+    # world_to_screen_x,  # See display
+    # world_to_screen_y,  # See display
 
     # # Core > Strings
     # asc as _asc,
@@ -184,43 +184,43 @@ from appgamekit import (
     # update_3d as _update_3d,  # TODO display
 
     # Core > Misc
-    # clear_url_scheme_text as _clear_url_scheme_text,  # Mobile only
-    # download_expansion_file as _download_expansion_file,  # Android only
-    # get_app_installed as is_app_installer,  # Android only
+    # clear_url_scheme_text,  # Not needed.  Mobile only
+    # download_expansion_file,  # Not needed.  Android only
+    # get_app_installed,  # Not needed.  Android only
     get_app_name,
-    # get_app_package_name,  # Mobile only
-    get_device_base_name as get_platform_name,
+    # get_app_package_name,  # Not needed.  Mobile only
+    get_device_base_name,  # as get_platform_name,
     get_device_id,  # as get_id,
     get_device_language,  # as get_language,
-    # GetDeviceName  # Deprecated
-    # get_device_network_type,  # Mobile only
-    # get_device_platform,  # Android only
-    get_device_type as get_platform_type,
-    # get_expansion_file_error,  # Android only
-    # get_expansion_file_progress,  # Android only
-    # get_expansion_file_state,  # Android only
-    # get_frame_time,  # display
+    # GetDeviceName  # Not needed.  Deprecated
+    # get_device_network_type,  # Not needed.  Mobile only
+    # get_device_platform,  # Not needed.  Android only
+    get_device_type,  # as get_platform_type,
+    # get_expansion_file_error,  # Not needed.  Android only
+    # get_expansion_file_progress,  # Not needed.  Android only
+    # get_expansion_file_state,  # Not needed.  Android only
+    # get_frame_time,  # See display
     get_milliseconds,
     get_num_processors as get_processor_count,
     get_seconds,
-    # get_storage_remaining,  # Mobile only
-    # get_storage_total,  # Mobile only
-    # get_url_scheme_text,  # Mobile only
+    # get_storage_remaining,  # Not needed.  Mobile only
+    # get_storage_total,  # Not needed.  Mobile only
+    # get_url_scheme_text,  # Not needed.  Mobile only
     message,
     reset_timer,
-    # set_antialias_mode,  # display
-    # set_default_mag_filter,  # display
-    # set_default_min_filter,  # display
-    # set_default_wrap_u,  # display
-    # set_default_wrap_v,  # display
-    # set_expansion_file_key,  # Android only
-    # set_expansion_file_version,  # Android only
-    # set_generate_mipmaps,  # display
+    # set_antialias_mode,  # See display
+    # set_default_mag_filter,  # See display
+    # set_default_min_filter,  # See display
+    # set_default_wrap_u,  # See display
+    # set_default_wrap_v,  # See display
+    # set_expansion_file_key,  # Not needed.  Android only
+    # set_expansion_file_version,  # Not needed.  Android only
+    # set_generate_mipmaps,  # See display
     set_sleep_mode,
     # set_sort_created,  # display
-    # SetSortDepth  # Deprecated
-    # SetSortTextures  # Deprecated
-    # SetSortTransparentDepth  # Deprecated
+    # SetSortDepth  # Not needed.  Deprecated
+    # SetSortTextures  # Not needed.  Deprecated
+    # SetSortTransparentDepth  # Not needed.  Deprecated
     set_window_title,
     # sha1,  # TODO
     # sha256,  # TODO
@@ -232,25 +232,30 @@ from appgamekit import (
     get_app_running as _get_app_running,
     run_app as _run_app,
     terminate_app as _terminate_app,
-    # share_file,  # Mobile only
-    # share_image,  # Mobile only
-    # share_image_and_text,  # Mobile only
-    # share_text,  # Mobile only
+    # share_file,  # Not needed.  Mobile only
+    # share_image,  # Not needed.  Mobile only
+    # share_image_and_text,  # Not needed.  Mobile only
+    # share_text,  # Not needed.  Mobile only
     view_file,
 
     # Core > Drawing
-    # draw_box,  # display
-    # draw_ellipse,  # display
-    # draw_line,  # display
-    # draw_line_rgb,  # display
+    # draw_box,  # See display
+    # draw_ellipse,  # See display
+    # draw_line,  # See display
+    # draw_line_rgb,  # See display
 
     # get_color_blue as _get_color_blue,  # color
     # get_color_green as _get_color_green,  # color
     # get_color_red as _get_color_red,  # color
     # make_color as _make_color,  # color
+
+    # 3D > Shaders
+    get_supported_shader_varyings as get_supported_shader_varyings_count,
+    # 3D > Shadows
+    get_shadow_mapping_supported as supports_shadow_mapping,
 )
 from ._enums import CameraType
-from ._image import Image
+from ._grfx.image import Image as _Image
 from typing import Optional as _Optional
 
 
@@ -308,14 +313,14 @@ class DeviceCamera(object):
     def is_streaming(self) -> bool:
         return DeviceCamera.__stream_image is not None
 
-    def start_streaming(self) -> _Optional[Image]:
+    def start_streaming(self) -> _Optional[_Image]:
         """
         Returns an image onto which the camera streams.
 
         If the device doesn't support streaming to an image, None is returned.
         """
         _id = self.__id
-        image = Image()
+        image = _Image()
         if not _set_device_camera_to_image(_id, image.id):
             return None
         # Store the stream image so calling code doesn't have to.

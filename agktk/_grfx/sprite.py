@@ -2,6 +2,16 @@
 Sprites
 """
 from appgamekit import (
+    # 2DPhysics > Contacts
+    get_contact_sprite_id1 as _get_contact_sprite_id1,
+    get_contact_sprite_id2 as _get_contact_sprite_id2,
+    get_contact_world_x as _get_contact_world_x,
+    get_contact_world_y as _get_contact_world_y,
+    get_sprite_contact_sprite_id2 as _get_sprite_contact_sprite_id2,
+    get_sprite_contact_world_x as _get_sprite_contact_world_x,
+    get_sprite_contact_world_y as _get_sprite_contact_world_y,
+    get_sprite_first_contact as _get_sprite_first_contact,
+    get_sprite_next_contact as _get_sprite_next_contact,
     # Sprite > Animation
     add_sprite_animation_frame as _add_sprite_animation_frame,
     clear_sprite_animation_frames as _clear_sprite_animation_frames,
@@ -90,10 +100,9 @@ from appgamekit import (
     get_sprite_flipped_v as _get_sprite_flipped_v,
     get_sprite_group as _get_sprite_group,
     get_sprite_height as _get_sprite_height,
-    # TODO: If these 3 methods are implemented, weekrefs will need to be stored (see editbox).  classmethods
-    # get_sprite_hit,
-    # get_sprite_hit_category,
-    # get_sprite_hit_group,
+    get_sprite_hit as _get_sprite_hit,
+    get_sprite_hit_category as _get_sprite_hit_category,
+    get_sprite_hit_group as _get_sprite_hit_group,
     get_sprite_hit_test as _get_sprite_hit_test,
     # get_sprite_image_id,  # Not needed.
     get_sprite_in_screen as _get_sprite_in_screen,
@@ -135,7 +144,7 @@ from appgamekit import (
     set_sprite_scale as _set_sprite_scale,
     set_sprite_scale_by_offset as _set_sprite_scale_by_offset,
     set_sprite_scissor as _set_sprite_scissor,
-    # TODO set_sprite_shader,
+    set_sprite_shader as _set_sprite_shader,
     set_sprite_size as _set_sprite_size,
     set_sprite_snap as _set_sprite_snap,
     set_sprite_transparency as _set_sprite_transparency,
@@ -156,34 +165,84 @@ from appgamekit import (
     # delete_all_sprites,  # Not needed.
     # delete_all_text,  # why is this in here?
     delete_sprite as _delete_sprite,
-    # load_sprite,  # Don't allow this usage.  Must use an Image.
-    # load_sprite_id,  # Don't allow this usage.  Must use an Image.
+    # load_sprite,  # Not needed.  Don't allow this usage.  Must use an Image.
+    # load_sprite_id,  # Not needed.  Don't allow this usage.  Must use an Image.
     # Skeleton > 2D
     fix_sprite_to_skeleton_2d as _fix_sprite_to_skeleton_2d,
 )
-from ._enums import (
+from agktk._enums import (
     PhysicsMode,
     # SpriteShape,
     TransparencyMode,
 )
-from ._image import Image
-from typing import Optional, Sequence, Tuple, Union
+from .image import Image
+from .._grfx3d import Shader
+from typing import List, Optional, Sequence, Tuple, Union
 from copy import deepcopy as _deepcopy
+import weakref as _weakref
+
+
+class SpriteContact(object):
+    def __init__(self, for_sprite: "Sprite" = None):
+        # Load everything now.
+        if for_sprite:
+            # Use the sprite-specific functions
+            self.__sprite1 = for_sprite
+            # noinspection PyProtectedMember
+            self.__sprite2 = Sprite._from_id(_get_sprite_contact_sprite_id2())
+            self.__world_x = _get_sprite_contact_world_x()
+            self.__world_y = _get_sprite_contact_world_y()
+        else:
+            # noinspection PyProtectedMember
+            self.__sprite1 = Sprite._from_id(_get_contact_sprite_id1())
+            # noinspection PyProtectedMember
+            self.__sprite2 = Sprite._from_id(_get_contact_sprite_id2())
+            self.__world_x = _get_contact_world_x()
+            self.__world_y = _get_contact_world_y()
+
+    @property
+    def sprite1(self) -> "Sprite":
+        return self.__sprite1
+
+    @property
+    def sprite2(self) -> "Sprite":
+        return self.__sprite2
+
+    @property
+    def world_x(self) -> float:
+        return self.__world_x
+
+    @property
+    def world_y(self) -> float:
+        return self.__world_y
 
 
 class Sprite(object):
     """
     Wraps AppGameKit sprite object methods.
     """
+    __instances = _weakref.WeakValueDictionary()
+
+    def __new__(cls, *args, **kwargs):
+        _id = kwargs.get("_id")
+        # If an ID is given and it is 0, don't create an instance.
+        if _id == 0:
+            return None
+        o = super().__new__(cls)
+        return o
 
     def __init__(self, image: Image = None, x: float = 0, y: float = 0, width: float = None, height: float = None,
-                 dummy: bool = False):
-        _id = _create_dummy_sprite() if dummy else _create_sprite(image.id if image else 0)
+                 dummy: bool = False, **kwargs):
+        _id = kwargs.get("_id")
+        if _id is None:
+            _id = _create_dummy_sprite() if dummy else _create_sprite(image.id if image else 0)
         self.__id = _id
+        Sprite.__instances[_id] = self
         # Sprites have an image plus up to 7 additional images.  See set_sprite_additional_image.
         self.__images = [image] + [None] * 7
         self.__fixed_to_screen = False
         self.__animation_images = []
+        self.__shader = None
         _set_sprite_position(_id, x, y)
         if width or height:
             width = width or _get_sprite_width(_id)
@@ -205,6 +264,15 @@ class Sprite(object):
         """The internal ID for this object."""
         return self.__id
 
+    @classmethod
+    def _from_id(cls, sprite_id: int):
+        """Internal use only."""
+        if not sprite_id:
+            return None
+        if sprite_id in cls.__instances:
+            return cls.__instances.get(sprite_id)
+        return Sprite(_id=sprite_id)
+
     def clone(self) -> "Sprite":
         # Don't call __init__.
         # c = Sprite.__new__(Sprite)
@@ -213,6 +281,18 @@ class Sprite(object):
         # c.__images = self.__images
         # c.__fixed_to_screen = self.__fixed_to_screen
         return c
+
+    @classmethod
+    def get_sprite_hit(cls, x: float, y: float, category: int = None, group: int = None) -> "Sprite":
+        if category is not None and group is not None:
+            raise ValueError("If either 'category' or 'group' is specified, only one may be specified.")
+        if category is not None:
+            _id = _get_sprite_hit_category(category, x, y)
+        elif group is not None:
+            _id = _get_sprite_hit_group(group, x, y)
+        else:
+            _id = _get_sprite_hit(x, y)
+        return Sprite._from_id(_id)
 
     # Sprite > Properties
     def draw(self):
@@ -436,8 +516,9 @@ class Sprite(object):
     def set_scissor(self, x1: float, y1: float, x2: float, y2: float):
         _set_sprite_scissor(self.__id, x1, y1, x2, y2)
 
-    # def set_shader(self, shader: Shader):
-    #     set_sprite_shader(self.__id, shader.id if shader else 0)
+    def set_shader(self, shader: Shader):
+        self.__shader = shader
+        _set_sprite_shader(self.__id, shader.id if shader else 0)
 
     def set_snap_enabled(self, enabled: bool):
         _set_sprite_snap(self.__id, enabled)
@@ -642,8 +723,8 @@ class Sprite(object):
         _set_sprite_physics_velocity(self.__id, x, y)
 
     def set_physics_angular_damping(self, damping: float):
-        _set_sprite_physics_angular_damping(self.__id, damping
-                                           )
+        _set_sprite_physics_angular_damping(self.__id, damping)
+
     def set_physics_angular_impulse(self, impulse: float):
         _set_sprite_physics_angular_impulse(self.__id, impulse)
 
@@ -694,3 +775,13 @@ class Sprite(object):
 
     def detach_from_skeleton(self):
         _fix_sprite_to_skeleton_2d(self.__id, 0, 0, 0)
+
+    def get_contacts(self) -> List[SpriteContact]:
+        _id = self.__id
+
+        def _get_contacts():
+            if _get_sprite_first_contact(_id):
+                yield SpriteContact(self)
+                while _get_sprite_next_contact():
+                    yield SpriteContact(self)
+        return list(_get_contacts())

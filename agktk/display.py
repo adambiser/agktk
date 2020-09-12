@@ -1,5 +1,13 @@
 # noinspection PyUnresolvedReferences, PyShadowingBuiltins
 from appgamekit import (
+    # 3D > Objects
+    # Renamed to match the 2D functions.  screen_to_world_x, world_to_screen_x, etc
+    get_3d_vector_x_from_screen as screen_to_3d_vector_x,
+    get_3d_vector_y_from_screen as screen_to_3d_vector_y,
+    get_3d_vector_z_from_screen as screen_to_3d_vector_z,
+    get_screen_x_from_3d as world_3d_to_screen_x,
+    get_screen_y_from_3d as world_3d_to_screen_y,
+
     # Core > Display
     clear_depth_buffer,
     clear_screen,
@@ -36,7 +44,7 @@ from appgamekit import (
     set_vsync,
     set_view_offset,
     set_view_zoom,
-    set_view_zoom_mode,
+    set_view_zoom_mode as _set_view_zoom_mode,
     set_virtual_resolution,
     swap,
     sync,
@@ -77,7 +85,8 @@ from appgamekit import (
     set_print_size,
     set_print_spacing,
 )
-from ._font import Font
+from ._enums import ZoomMode
+from ._grfx.font import Font
 
 __print_font = None
 
@@ -87,3 +96,7 @@ def set_print_font(font: Font):
     global __print_font
     __print_font = font
     _set_print_font(font.id)
+
+
+def set_view_zoom_mode(mode: ZoomMode):
+    _set_view_zoom_mode(mode)

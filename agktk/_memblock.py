@@ -5,10 +5,13 @@ MeshMemblocks
 from appgamekit import (
     # Memblock > Sound
     create_memblock_from_sound as _create_memblock_from_sound,
+    # create_memblock_id_from_sound,  # Not needed.
     # create_sound_from_memblock as _create_sound_from_memblock,  # See Sound class.
+    # create_sound_id_from_memblock,  # Not needed.
     # Memblock > General
     copy_memblock as _copy_memblock,
     create_memblock as _create_memblock,
+    # create_memblock_id,  # Not needed.
     delete_memblock as _delete_memblock,
     get_memblock_byte as _get_memblock_byte,
     get_memblock_byte_signed as _get_memblock_byte_signed,
@@ -27,14 +30,19 @@ from appgamekit import (
     # Memblock > File
     create_file_from_memblock as _create_file_from_memblock,
     create_memblock_from_file as _create_memblock_from_file,
+    # create_memblock_id_from_file,  # Not needed.
     # Memblock > Image
     # create_image_from_memblock as _create_image_from_memblock,  # See Image class.
+    # create_image_id_from_memblock,  # Not needed.
     create_memblock_from_image as _create_memblock_from_image,
+    # create_memblock_id_from_image,  # Not needed.
     # Memblock > Mesh
-    # add_object_mesh_from_memblock as _add_object_mesh_from_memblock,  # See ObjectModel class
+    # add_object_mesh_from_memblock,  # See Object3D class
     create_memblock_from_object_mesh as _create_memblock_from_object_mesh,
-    # create_object_from_mesh_memblock as _create_object_from_mesh_memblock,  # See ObjectModel class
-    # set_object_mesh_from_memblock as _set_object_mesh_from_memblock,  # See ObjectModel class
+    # create_memblock_id_from_object_mesh,  # Not needed.
+    # create_object_from_mesh_memblock,  # See Object3D class
+    # create_object_id_from_mesh_memblock,  # Not needed.
+    # set_object_mesh_from_memblock,  # See Object3D class
     get_mesh_memblock_vertex_alpha as _get_mesh_memblock_vertex_alpha,
     get_mesh_memblock_vertex_blue as _get_mesh_memblock_vertex_blue,
     get_mesh_memblock_vertex_green as _get_mesh_memblock_vertex_green,
@@ -52,22 +60,45 @@ from appgamekit import (
     set_mesh_memblock_vertex_position as _set_mesh_memblock_vertex_position,
     set_mesh_memblock_vertex_uv as _set_mesh_memblock_vertex_uv,
 )
-from ._image import Image
-from ._sound import Sound
+from ._grfx import Image
+from ._audio.sound import Sound
+from ._grfx3d.object3d import Mesh
 
 
 class Memblock(object):
     """
     Wraps AppGameKit memblock methods.
     """
-    def __init__(self, size: int):
-        self.__id = _create_memblock(size)
+    def __init__(self, *,
+                 size: int = None,
+                 filename: str = None,
+                 image: Image = None,
+                 sound: Sound = None,
+                 **kwargs
+                 ):
+        if "_id" in kwargs:
+            # Internal use only!
+            self.__id = kwargs["_id"]
+        elif filename:
+            self.__id = _create_memblock_from_file(filename)
+        elif image:
+            self.__id = _create_memblock_from_image(image.id)
+        elif sound:
+            self.__id = _create_memblock_from_sound(sound.id)
+        elif size is not None:
+            self.__id = _create_memblock(size)
+        else:
+            raise TypeError(f"{self.__class__.__name__}() requires"
+                            f" a 'size' argument"
+                            f" a 'filename' argument,"
+                            f" an 'image' argument,"
+                            f" or a 'sound' argument.")
 
     def __del__(self):
         """Deletes the object."""
         try:
             _delete_memblock(self.__id)
-        except TypeError:
+        except (TypeError, AttributeError):
             pass
 
     def __repr__(self):
@@ -121,43 +152,22 @@ class Memblock(object):
     def set_string(self, offset: int, value: str):
         _set_memblock_string(self.__id, offset, value)
 
-    @classmethod
-    def from_file(cls, filename: str):
-        mem = cls.__new__(cls)
-        mem.__id = _create_memblock_from_file(filename)
-        return mem
-
     def save_to_file(self, filename):
         _create_file_from_memblock(filename, self.__id)
-
-    @classmethod
-    def from_image(cls, image: Image) -> "Memblock":
-        mem = cls.__new__(cls)
-        mem.__id = _create_memblock_from_image(image.id)
-        return mem
-
-    @classmethod
-    def from_sound(cls, sound: Sound) -> "Memblock":
-        mem = cls.__new__(cls)
-        mem.__id = _create_memblock_from_sound(sound.id)
-        return mem
 
 
 class MeshMemblock(Memblock):
     """
     Wraps AppGameKit mesh memblock methods.
     """
-    def __init__(self, size: int):
-        super().__init__(size)
-        # Store the id privately.
+    def __init__(self, *, mesh: Mesh):
+        if mesh:
+            super().__init__(_id=_create_memblock_from_object_mesh(mesh.object3d.id, mesh.id))
+        else:
+            raise TypeError(f"{self.__class__.__name__}() requires"
+                            f" a 'mesh' argument.")
+        # Store the id privately so this subclass has a copy.
         self.__id = self.id
-
-    # TODO
-    # @classmethod
-    # def from_object_mesh(cls, obj: ObjectModel, mesh_id: int) -> "MeshMemblock":
-    #     mem = cls.__new__(cls)
-    #     mem.__id = _create_memblock_from_object_mesh(obj.id, mesh_id)
-    #     return mem
 
     def get_vertex_alpha(self, vertex: int) -> int:
         return _get_mesh_memblock_vertex_alpha(self.__id, vertex)

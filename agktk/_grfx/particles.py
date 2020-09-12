@@ -1,6 +1,7 @@
 from appgamekit import (
     # Particles > Creation
     create_particles as _create_particles,
+    # create_particles_id,  # Not needed.
     delete_particles as _delete_particles,
     # Particles > Properties
     add_particles_color_key_frame as _add_particles_color_key_frame,
@@ -48,12 +49,12 @@ from appgamekit import (
     set_particles_visible as _set_particles_visible,
     update_particles as _update_particles,
 )
-from ._enums import (
+from agktk._enums import (
     InterpolationMode,
     RotationMode,
     TransparencyMode,
 )
-from ._image import Image
+from .image import Image
 from typing import Optional
 
 

@@ -91,7 +91,12 @@ from appgamekit import (
     # set_text_default_mag_filter, set_text_default_min_filter
     FILTER_NEAREST,
     FILTER_LINEAR,
-    
+
+    # HTTP response status - get_http_response_ready
+    HTTP_RESPONSE_STATUS_FAILED,
+    HTTP_RESPONSE_STATUS_IN_PROGRESS,
+    HTTP_RESPONSE_STATUS_COMPLETED,
+
     # Text input state - returned by get_text_input_state
     INPUT_TEXT_ACTIVE,
     INPUT_TEXT_DONE,
@@ -147,7 +152,7 @@ from appgamekit import (
     # Shadow mapping modes - set_shadow_mapping_mode
     SHADOW_MAP_NONE,
     SHADOW_MAP_UNIFORM,
-    SHADOW_MAP_LIPSM,
+    SHADOW_MAP_LISPSM,
     SHADOW_MAP_CASCADE,
     
     # Shadow smoothing - set_shadow_smoothing
@@ -160,7 +165,12 @@ from appgamekit import (
     SHAPE_CIRCLE,
     SHAPE_BOX,
     SHAPE_POLYGON,
-    
+
+    # Socket states - get_socket_connected
+    SOCKET_STATE_DISCONNECTED,
+    SOCKET_STATE_CONNECTING,
+    SOCKET_STATE_CONNECTED,
+
     # Key, button, and pointer states - returned by get_button_state, get_pointer_state, get_virtual_button_state,
     # get_raw_joystick_button_state, get_raw_key_state, get_raw_mouse_left_state, get_raw_mouse_middle_state,
     # get_raw_mouse_right_state
@@ -181,6 +191,7 @@ from appgamekit import (
     TRANSPARENCY_CUSTOM,
     
     # Tween interpolation types - the set_tween_* methods
+    TWEEN_OFF,
     TWEEN_LINEAR,
     TWEEN_SMOOTH1,
     TWEEN_SMOOTH2,
@@ -190,7 +201,12 @@ from appgamekit import (
     TWEEN_EASE_OUT2,
     TWEEN_BOUNCE,
     TWEEN_OVERSHOOT,
-    
+
+    # Video load responses - load_video
+    VIDEO_LOAD_UNSUPPORTED,
+    VIDEO_LOAD_ERROR,
+    VIDEO_LOAD_SUCCESS,
+
     # UV Texture wrapping modes - set_default_wrap_u, set_default_wrap_v, set_image_wrap_u, set_image_wrap_v
     WRAP_CLAMP,
     WRAP_REPEAT,

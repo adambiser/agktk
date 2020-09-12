@@ -2,6 +2,7 @@ from appgamekit import (
     # File > Read
     file_eof as _file_eof,
     open_to_read as _open_to_read,
+    # open_to_read_id,  # Not needed.
     read_byte as _read_byte,
     read_float as _read_float,
     read_integer as _read_integer,
@@ -10,6 +11,7 @@ from appgamekit import (
     read_string2 as _read_string2,
     # File > Write
     open_to_write as _open_to_write,
+    # open_to_write_id,  # Not needed.
     write_byte as _write_byte,
     write_float as _write_float,
     write_integer as _write_integer,

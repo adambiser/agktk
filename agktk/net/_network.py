@@ -1,6 +1,7 @@
 from appgamekit import (
     # Multiplayer > UDP
     create_udp_listener as _create_udp_listener,
+    # create_udp_listener_id,   # Not needed.
     delete_udp_listener as _delete_udp_listener,
     get_udp_network_message as _get_udp_network_message,
     send_udp_network_message as _send_udp_network_message,
@@ -10,6 +11,7 @@ from appgamekit import (
     host_network as _host_network,
     is_network_active as _is_network_active,
     join_network as _join_network,
+    join_network_ip as _join_network_ip,
     set_network_allow_clients as _set_network_allow_clients,
     set_network_latency as _set_network_latency,
     set_network_no_more_clients as _set_network_no_more_clients,
@@ -36,10 +38,12 @@ from appgamekit import (
     set_network_local_integer as _set_network_local_integer,
     # Multiplayer > Broadcast
     create_broadcast_listener as _create_broadcast_listener,
+    create_broadcast_listener_ipv6 as _create_broadcast_listener_ipv6,
     delete_broadcast_listener as _delete_broadcast_listener,
     get_broadcast_message as _get_broadcast_message,
     # Multiplayer > Sockets
     connect_socket as _connect_socket,
+    # connect_socket_id,  # Not needed.
     delete_socket as _delete_socket,
     flush_socket as _flush_socket,
     get_socket_byte as _get_socket_byte,
@@ -73,6 +77,7 @@ from appgamekit import (
     send_network_message as _send_network_message,
     # Multiplayer > Socket Listener
     create_socket_listener as _create_socket_listener,
+    # create_socket_listener_id,  # Not needed.
     delete_socket_listener as _delete_socket_listener,
     get_socket_listener_connection as _get_socket_listener_connection,
 )
@@ -290,9 +295,15 @@ class Network(object):
         return _get_network_server_ip(self.__id)
 
     @classmethod
-    def join(cls, network_name: str, my_name: str):
+    def join(cls, my_name: str, network_name: str = None, ip: str = None, port: int = None) -> "Network":
         n = cls.__new__(cls)
-        n.__id = _join_network(network_name, my_name)
+        if network_name:
+            n.__id = _join_network(network_name, my_name)
+        elif ip and port:
+            n.__id = _join_network_ip(ip, port, my_name)
+        else:
+            raise ValueError("Either a 'network_name' or the `ip` and `port` must be given.")
+        return n
 
     def set_latency(self, latency: int):
         _set_network_latency(self.__id, latency)
@@ -335,8 +346,8 @@ class BroadcastListener(object):
     """
     Wraps AppGameKit broadcast listener methods.
     """
-    def __init__(self, port: int):
-        self.__id = _create_broadcast_listener(port)
+    def __init__(self, port: int, ipv6: str = None):
+        self.__id = _create_broadcast_listener_ipv6(ipv6, port) if ipv6 else _create_broadcast_listener(port)
 
     def __del__(self):
         """Deletes the object."""

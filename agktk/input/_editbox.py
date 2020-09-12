@@ -4,6 +4,7 @@ An on-screen edit box.
 from appgamekit import (
     # Input > Edit Box
     create_edit_box as _create_edit_box,
+    # create_edit_box_id,  # Not needed.
     delete_edit_box as _delete_edit_box,
     fix_edit_box_to_screen as _fix_edit_box_to_screen,
     get_current_edit_box as _get_current_edit_box,
@@ -35,7 +36,7 @@ from appgamekit import (
     set_edit_box_focus as _set_edit_box_focus,
     set_edit_box_font as _set_edit_box_font,
     set_edit_box_font_image as _set_edit_box_font_image,
-    # set_edit_box_input_type as _set_edit_box_input_type,  # mobile only
+    # set_edit_box_input_type,  # Not needed.  Mobile only
     set_edit_box_max_chars as _set_edit_box_max_chars,
     set_edit_box_max_lines as _set_edit_box_max_lines,
     set_edit_box_multiline as _set_edit_box_multiline,
@@ -46,7 +47,7 @@ from appgamekit import (
     set_edit_box_text as _set_edit_box_text,
     set_edit_box_text_color as _set_edit_box_text_color,
     set_edit_box_text_size as _set_edit_box_text_size,
-    # set_edit_box_use_alternate_input as _set_edit_box_use_alternate_input,  # mobile only
+    # set_edit_box_use_alternate_input,  # Not needed.  Mobile only
     set_edit_box_visible as _set_edit_box_visible,
     set_edit_box_wrap_mode as _set_edit_box_wrap_mode,
 )
@@ -55,8 +56,8 @@ from .._constants import (
     EDIT_BOX_WRAP_SCROLL as _EDIT_BOX_WRAP_SCROLL,
     EDIT_BOX_WRAP_NEW_LINE as _EDIT_BOX_WRAP_NEW_LINE,
 )
-from .._font import Font
-from .._image import Image
+from .._grfx.font import Font
+from .._grfx.image import Image
 from typing import Optional, Tuple
 import weakref as _weakref
 

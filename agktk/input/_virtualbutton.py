@@ -23,7 +23,7 @@ from agktk._constants import (
     STATE_UP as _STATE_UP,
     STATE_DOWN as _STATE_DOWN,
 )
-from agktk._image import Image
+from .._grfx.image import Image
 from typing import Optional, Tuple, Union
 
 

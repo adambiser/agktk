@@ -4,7 +4,7 @@ from appgamekit import (
     decode_qr_code as _decode_qr_code,
     encode_qr_code as _encode_qr_code
 )
-from . import Image as _Image
+from .image import Image as _Image
 
 
 def decode(image: _Image) -> str:

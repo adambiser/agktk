@@ -13,16 +13,24 @@ from appgamekit import (
     get_vector3_z as _get_vector3_z,
     set_vector3 as _set_vector3,
 )
+import weakref as _weakref
 
 
+# TODO Remove function chaining?
 class Vector3(object):
     """
     Wraps AGK vector3 methods.
 
     Function chaining is supported.
     """
-    def __init__(self, x: float = 0, y: float = 0, z: float = 0):
-        self.__id = _create_vector3(x, y, z)
+    __instances = _weakref.WeakValueDictionary()
+
+    def __init__(self, x: float = 0, y: float = 0, z: float = 0, *args, **kwargs):
+        _id = kwargs.get("_id")
+        if _id is None:
+            _id = _create_vector3(x, y, z)
+        self.__id = _id
+        Vector3.__instances[_id] = self
 
     def __del__(self):
         """Delete the image."""
@@ -38,6 +46,15 @@ class Vector3(object):
     def id(self) -> int:
         """The internal ID for this object."""
         return self.__id
+
+    @classmethod
+    def _from_id(cls, vector_id: int):
+        """Internal use only."""
+        if not vector_id:
+            return None
+        if vector_id in cls.__instances:
+            return cls.__instances.get(vector_id)
+        return Vector3(_id=vector_id)
 
     def set(self, x: float, y: float, z: float):
         _set_vector3(self.__id, x, y, z)

@@ -6,6 +6,7 @@ from appgamekit import (
     # get_font_exists,  # not needed
     get_system_font_exists,
     load_font as _load_font,
+    # load_font_id,  # Not needed.
 )
 
 
@@ -29,3 +30,6 @@ class Font(object):
         """The internal ID for this object."""
         return self.__id
 
+    @staticmethod
+    def system_font_exists(name: str) -> bool:
+        return get_system_font_exists(name)
